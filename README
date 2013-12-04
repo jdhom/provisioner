@@ -1,0 +1,38 @@
+Simple vagrant/puppet/virtualbox setup for provisioning a jenkins build server.  The initial basebox is sourced from http://www.vagrantbox.es/.
+
+	CentOS 6.4 x86_64 Minimal (VirtualBox Guest Additions 4.2.16, Chef 11.6.0, Puppet 3.2.3)
+
+puppet/manifests/jenkins.pp provisions stuff like...
+	* jdk
+	* nodejs/npm/grunt-cli
+	* firewall port forward (host 8080 -> vbox 8080)
+
+note: initial use will import the basebox over http, will take several minutes
+
+:Top
+
+Import and provision the virtual
+
+	vagrant up
+
+	http://localhost:8080    to verify jenkins is running
+
+Log into the virtual and verify stuff has been installed
+
+	vagrant ssh
+
+	run node, npm and grunt from shell to verify install/symlinks (in /usr/local/bin)
+
+Suspend the virtual (fast resume)
+
+	vagrant suspend
+	...
+	vagrant resume ('vagrant up' works too)
+
+Graceful shutdown
+
+	vagrant halt
+
+Done with the virtual for a while... delete it
+
+	vagrant destroy
