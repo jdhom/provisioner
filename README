@@ -36,3 +36,5 @@ Graceful shutdown
 Done with the virtual for a while... delete it
 
 	vagrant destroy
+
+goto Top

@@ -1,3 +1,4 @@
+#todo: try adding /usr/local/bin so npm is in the path. no joy.
 Exec { 
 	path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/", "/usr/local/bin/" ]
 }
@@ -28,7 +29,6 @@ file { '/usr/local/bin/grunt':
 	ensure => 'link',
 	target => '/usr/local/node/node-v0.10.22/lib/node_modules/grunt-cli/bin/grunt'
 }
-
 
 # Couldn't get the grunt-cli package to work 
 #    "Provider npm is not functional on this host"
