@@ -12,8 +12,16 @@ class {'jenkins':
 } #->
 #jenkins::plugin { 'greenballs':} 
 
-firewall { '100 default jenkins host to guest port forward':
+resources { 'firewall':
+	purge => true
+}
+firewall { '000 8080 for jenkins':
 	port => [8080],
+	proto => tcp,
+	action => accept
+}->
+firewall {  '001 11211 for memcached':
+	port => [11211],
 	proto => tcp,
 	action => accept
 }
@@ -28,6 +36,10 @@ exec { 'get-grunt':
 file { '/usr/local/bin/grunt':
 	ensure => 'link',
 	target => '/usr/local/node/node-v0.10.22/lib/node_modules/grunt-cli/bin/grunt'
+}
+
+class { 'memcached':
+	max_memory => '20%'
 }
 
 # Couldn't get the grunt-cli package to work 
